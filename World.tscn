@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://PlayerNode.gd" type="Script" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://parede.png" type="Texture" id=3]
+[ext_resource path="res://bater_asas.mp3" type="AudioStream" id=5]
+[ext_resource path="res://morcego_1.png" type="Texture" id=6]
+[ext_resource path="res://morcego_2.png" type="Texture" id=7]
+[ext_resource path="res://morcego_3.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 96, 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30, 30 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31, 31 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="World" type="Node2D"]
+
+[node name="PlayerNode" type="Node2D" parent="."]
+position = Vector2( 506, 298 )
+script = ExtResource( 1 )
+
+[node name="LowerFloorNode" type="Node2D" parent="PlayerNode"]
+position = Vector2( 0, -318 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlayerNode/LowerFloorNode"]
+
+[node name="Sprite" type="Sprite" parent="PlayerNode/LowerFloorNode/StaticBody2D"]
+scale = Vector2( 6, 1 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/LowerFloorNode/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="Player" type="KinematicBody2D" parent="PlayerNode"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/Player"]
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="PlayerNode/Player"]
+
+[node name="Detect" type="Area2D" parent="PlayerNode/Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/Player/Detect"]
+shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PlayerNode/Player"]
+stream = ExtResource( 5 )
+volume_db = 5.0
+
+[node name="Timer" type="Timer" parent="PlayerNode/Player"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PlayerNode/Player"]
+frames = SubResource( 4 )
+
+[node name="UpperFloorNode" type="Node2D" parent="PlayerNode"]
+position = Vector2( 0, 318 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlayerNode/UpperFloorNode"]
+
+[node name="Sprite" type="Sprite" parent="PlayerNode/UpperFloorNode/StaticBody2D"]
+scale = Vector2( 6, 1 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/UpperFloorNode/StaticBody2D"]
+shape = SubResource( 1 )
