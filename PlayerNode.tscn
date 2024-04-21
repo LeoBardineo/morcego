@@ -11,7 +11,6 @@ extents = Vector2( 30, 30 )
 extents = Vector2( 31, 31 )
 
 [node name="PlayerNode" type="Node2D"]
-position = Vector2( 506, 298 )
 script = ExtResource( 2 )
 
 [node name="Player" type="KinematicBody2D" parent="."]

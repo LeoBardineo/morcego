@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://PlayerNode.gd" type="Script" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://parede.png" type="Texture" id=3]
+[ext_resource path="res://WallNode.tscn" type="PackedScene" id=4]
 [ext_resource path="res://bater_asas.mp3" type="AudioStream" id=5]
 [ext_resource path="res://morcego_1.png" type="Texture" id=6]
 [ext_resource path="res://morcego_2.png" type="Texture" id=7]
@@ -26,27 +27,29 @@ animations = [ {
 } ]
 
 [node name="World" type="Node2D"]
+position = Vector2( 320, 184 )
 
 [node name="PlayerNode" type="Node2D" parent="."]
-position = Vector2( 506, 298 )
 script = ExtResource( 1 )
 
-[node name="LowerFloorNode" type="Node2D" parent="PlayerNode"]
-position = Vector2( 0, -318 )
+[node name="UpperFloorNode" type="Node2D" parent="PlayerNode"]
+position = Vector2( 0, -200 )
+scale = Vector2( 3, 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="PlayerNode/LowerFloorNode"]
+[node name="StaticBody2D" type="StaticBody2D" parent="PlayerNode/UpperFloorNode"]
 
-[node name="Sprite" type="Sprite" parent="PlayerNode/LowerFloorNode/StaticBody2D"]
+[node name="Sprite" type="Sprite" parent="PlayerNode/UpperFloorNode/StaticBody2D"]
 scale = Vector2( 6, 1 )
 texture = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/LowerFloorNode/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/UpperFloorNode/StaticBody2D"]
 shape = SubResource( 1 )
 
 [node name="Player" type="KinematicBody2D" parent="PlayerNode"]
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -71,17 +74,26 @@ volume_db = 5.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PlayerNode/Player"]
 frames = SubResource( 4 )
 
-[node name="UpperFloorNode" type="Node2D" parent="PlayerNode"]
-position = Vector2( 0, 318 )
+[node name="LowerFloorNode" type="Node2D" parent="PlayerNode"]
+position = Vector2( 0, 200 )
+scale = Vector2( 3, 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="PlayerNode/UpperFloorNode"]
+[node name="StaticBody2D" type="StaticBody2D" parent="PlayerNode/LowerFloorNode"]
 
-[node name="Sprite" type="Sprite" parent="PlayerNode/UpperFloorNode/StaticBody2D"]
+[node name="Sprite" type="Sprite" parent="PlayerNode/LowerFloorNode/StaticBody2D"]
 scale = Vector2( 6, 1 )
 texture = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/UpperFloorNode/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/LowerFloorNode/StaticBody2D"]
 shape = SubResource( 1 )
+
+[node name="WallNode" parent="." instance=ExtResource( 4 )]
+position = Vector2( 304, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
