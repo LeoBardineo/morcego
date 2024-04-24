@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://parede.png" type="Texture" id=1]
+[ext_resource path="res://parede.png" type="Texture2D" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 16 )
@@ -9,7 +9,7 @@ extents = Vector2( 96, 16 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 scale = Vector2( 6, 1 )
 texture = ExtResource( 1 )
 

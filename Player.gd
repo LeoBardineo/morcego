@@ -1,7 +1,7 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 const UP = Vector2(0, -1)
-const FLAP = 200
+const FLAP = 100
 const MAXFALLSPEED = 200
 const GRAVITY = 10
 const START_LIST = [1.0, 2.0, 3.7, 5.0, 6.4, 7.3, 8.0, 9.7, 11.0, 12.0, 13.0]
@@ -11,8 +11,8 @@ var Wall = preload("res://WallNode.tscn")
 var score = 0
 
 func _ready():
-	$Timer.connect("timeout", self, "_on_timer_timeout")
-	$AnimatedSprite.play()
+	$Timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+	$AnimatedSprite2D.play()
 
 func _physics_process(_delta):
 	motion.y += GRAVITY
@@ -25,28 +25,31 @@ func _physics_process(_delta):
 		$Timer.start()
 		motion.y = -FLAP
 	
-	motion = move_and_slide(motion, UP)
+	set_velocity(motion)
+	set_up_direction(UP)
+	move_and_slide()
+	motion = velocity
 
 func _on_timer_timeout():
 	$AudioStreamPlayer2D.stop()
 
 func Wall_reset():
-	var Wall_instance = Wall.instance()
-	Wall_instance.position = Vector2(450, rand_range(-60, 60))
+	var Wall_instance = Wall.instantiate()
+	Wall_instance.position = Vector2(450, randf_range(-60, 60))
 	get_parent().call_deferred("add_child", Wall_instance)
 
 func _on_Resetter_body_entered(body):
 	if body.name == "Walls":
-		body.queue_free()
 		Wall_reset()
+		body.queue_free()
 
 
 func _on_Detect_area_entered(area):
 	if area.name == "PointerArea":
 		score += 1
-		get_parent().get_parent().get_node("CanvasLayer/RichTextLabel").bbcode_text = "[center]Pontuação: " + str(score) + "[/center]"
+		get_parent().get_parent().get_node("CanvasLayer/RichTextLabel").text = "[center]Pontuação: " + str(score) + "[/center]"
 
 
 func _on_Detect_body_entered(body):
 	if body.name == "Walls":
-		get_tree().reload_current_scene()
+		get_tree().call_deferred("reload_current_scene")

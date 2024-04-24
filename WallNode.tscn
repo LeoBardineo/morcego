@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Walls.gd" type="Script" id=1]
-[ext_resource path="res://parede.png" type="Texture" id=2]
+[ext_resource path="res://parede.png" type="Texture2D" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 112 )
@@ -17,7 +17,7 @@ extents = Vector2( 16, 112 )
 [node name="Walls" type="StaticBody2D" parent="."]
 script = ExtResource( 1 )
 
-[node name="UpperSprite" type="Sprite" parent="Walls"]
+[node name="UpperSprite" type="Sprite2D" parent="Walls"]
 position = Vector2( 0, -152 )
 scale = Vector2( 1, 7 )
 texture = ExtResource( 2 )
@@ -32,7 +32,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, 8 )
 shape = SubResource( 3 )
 
-[node name="LowerSprite" type="Sprite" parent="Walls"]
+[node name="LowerSprite" type="Sprite2D" parent="Walls"]
 position = Vector2( 0, 168 )
 scale = Vector2( 1, 7 )
 texture = ExtResource( 2 )
