@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwi0phryprse4"]
+[gd_scene load_steps=13 format=3 uid="uid://bwi0phryprse4"]
 
 [ext_resource type="Script" path="res://PlayerNode.gd" id="1"]
 [ext_resource type="Script" path="res://Player.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://ciac2evc5b6ow" path="res://parede.png" id="3"]
-[ext_resource type="PackedScene" path="res://WallNode.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://bo1yvkqcwhhvc" path="res://WallNode.tscn" id="4"]
 [ext_resource type="AudioStream" uid="uid://ctnjb67h4l2jy" path="res://bater_asas.mp3" id="5"]
 [ext_resource type="Texture2D" uid="uid://dba834k4a8lbv" path="res://morcego_1.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://ynr1jum3swot" path="res://morcego_2.png" id="7"]
@@ -12,11 +12,7 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(192, 32)
 
-[sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(60, 60)
-
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(62, 62)
+[sub_resource type="CircleShape2D" id="CircleShape2D_8mycq"]
 
 [sub_resource type="SpriteFrames" id="4"]
 animations = [{
@@ -39,16 +35,19 @@ animations = [{
 size = Vector2(23.5, 352)
 
 [node name="World" type="Node2D"]
-position = Vector2(320, 184)
+position = Vector2(960, 540)
+scale = Vector2(2.59277, 2.60363)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 256.0
-offset_top = 16.0
-offset_right = 384.0
-offset_bottom = 56.0
+offset_left = 792.0
+offset_top = 73.0
+offset_right = 1160.0
+offset_bottom = 208.0
+scale = Vector2(0.96619, 0.875054)
+theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
 text = "Pontuação: 0"
 
@@ -73,14 +72,16 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/Player"]
-shape = SubResource("3")
+scale = Vector2(2.78243, 2.69727)
+shape = SubResource("CircleShape2D_8mycq")
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerNode/Player"]
 
 [node name="Detect" type="Area2D" parent="PlayerNode/Player"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/Player/Detect"]
-shape = SubResource("2")
+scale = Vector2(2.78351, 2.78351)
+shape = SubResource("CircleShape2D_8mycq")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PlayerNode/Player"]
 stream = ExtResource("5")
@@ -118,16 +119,16 @@ shape = SubResource("1")
 position = Vector2(352, 0)
 
 [node name="WallNode2" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(448, 0)
+position = Vector2(456.871, 0)
 
 [node name="WallNode3" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(736, 0)
+position = Vector2(744.1, 0)
 
 [node name="WallNode4" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(640, 0)
+position = Vector2(647.328, 0)
 
 [node name="WallNode5" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(544, 0)
+position = Vector2(552.099, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

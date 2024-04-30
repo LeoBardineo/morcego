@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 const UP = Vector2(0, -1)
-const FLAP = 100
-const MAXFALLSPEED = 200
-const GRAVITY = 10
+const FLAP = 350
+const MAXFALLSPEED = 280
+const GRAVITY = 20
 const START_LIST = [1.0, 2.0, 3.7, 5.0, 6.4, 7.3, 8.0, 9.7, 11.0, 12.0, 13.0]
 
 var motion = Vector2()
