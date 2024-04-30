@@ -10,6 +10,8 @@ var motion = Vector2()
 var Wall = preload("res://WallNode.tscn")
 var score = 0
 
+@onready var game_over = $"../../GameOver"
+
 func _ready():
 	$Timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	$AnimatedSprite2D.play()
@@ -52,4 +54,7 @@ func _on_Detect_area_entered(area):
 
 func _on_Detect_body_entered(body):
 	if body.name == "Walls":
-		get_tree().call_deferred("reload_current_scene")
+		get_tree().paused = true
+		game_over.show()
+		
+		#get_tree().call_deferred("reload_current_scene")
