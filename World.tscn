@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwi0phryprse4"]
+[gd_scene load_steps=15 format=3 uid="uid://bwi0phryprse4"]
 
 [ext_resource type="Script" path="res://PlayerNode.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/save_game.gd" id="1_7mg56"]
 [ext_resource type="Script" path="res://Player.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://ciac2evc5b6ow" path="res://parede.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://bo1yvkqcwhhvc" path="res://WallNode.tscn" id="4"]
@@ -38,6 +39,7 @@ size = Vector2(23.5, 352)
 [node name="World" type="Node2D"]
 position = Vector2(960, 540)
 scale = Vector2(2.59277, 2.60363)
+script = ExtResource("1_7mg56")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

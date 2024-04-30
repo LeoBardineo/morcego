@@ -9,13 +9,14 @@ const START_LIST = [1.0, 2.0, 3.7, 5.0, 6.4, 7.3, 8.0, 9.7, 11.0, 12.0, 13.0]
 var motion = Vector2()
 var Wall = preload("res://WallNode.tscn")
 var score = 0
+@onready var world = $"../.."
 
+@onready var score_txt = $"../../CanvasLayer/RichTextLabel".text
 @onready var game_over = $"../../GameOver"
-
 func _ready():
 	$Timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	$AnimatedSprite2D.play()
-
+	#score_txt.text = world.loadValue("Scores", "high_score")
 func _physics_process(_delta):
 	motion.y += GRAVITY
 	if motion.y > MAXFALLSPEED:
@@ -54,6 +55,7 @@ func _on_Detect_area_entered(area):
 
 func _on_Detect_body_entered(body):
 	if body.name == "Walls":
+		#score_txt.text = world.saveValue("Scores", "high_score")
 		get_tree().paused = true
 		game_over.show()
 		
