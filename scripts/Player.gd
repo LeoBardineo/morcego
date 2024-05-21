@@ -10,6 +10,7 @@ var motion = Vector2()
 var Wall = preload("res://scenes/WallNode.tscn")
 var score = 0
 
+@onready var dmg_sound = $"../../DamageSound"
 @onready var world = $"../.."
 @onready var score_txt = $"../../CanvasLayer/RichTextLabel".text
 @onready var game_over = $"../../GameOver"
@@ -56,6 +57,7 @@ func _on_Detect_area_entered(area):
 func _on_Detect_body_entered(body):
 	if body.name == "Walls":
 		#score_txt.text = world.saveValue("Scores", "high_score")
+		dmg_sound.play()
 		get_tree().paused = true
 		game_over.show()
 			#get_tree().call_deferred("reload_current_scene")

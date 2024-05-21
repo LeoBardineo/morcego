@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwi0phryprse4"]
+[gd_scene load_steps=15 format=3 uid="uid://bwi0phryprse4"]
 
 [ext_resource type="Script" path="res://scripts/PlayerNode.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ynr1jum3swot" path="res://morcego_2.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://c3cdk0eqbyn0r" path="res://morcego_3.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://8m774xjb4y2i" path="res://scenes/game_over.tscn" id="9_e256i"]
+[ext_resource type="PackedScene" uid="uid://cs5hldv6rdh7b" path="res://scenes/damage_sound.tscn" id="10_2u37n"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(192, 32)
@@ -138,6 +139,8 @@ position = Vector2(544, 0)
 [node name="GameOver" parent="." instance=ExtResource("9_e256i")]
 visible = false
 position = Vector2(-153.118, -115.224)
+
+[node name="DamageSound" parent="." instance=ExtResource("10_2u37n")]
 
 [connection signal="area_entered" from="PlayerNode/Player/Detect" to="PlayerNode/Player" method="_on_Detect_area_entered"]
 [connection signal="body_entered" from="PlayerNode/Player/Detect" to="PlayerNode/Player" method="_on_Detect_body_entered"]

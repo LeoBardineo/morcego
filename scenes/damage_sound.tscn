@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs5hldv6rdh7b"]
+
+[ext_resource type="AudioStream" uid="uid://cqxlpxvkyfkks" path="res://audio/dmg_noise.mp3" id="1_7w8kp"]
+
+[node name="DamageSound" type="AudioStreamPlayer2D"]
+process_mode = 3
+stream = ExtResource("1_7w8kp")
