@@ -61,3 +61,4 @@ func _on_Detect_body_entered(body):
 		get_tree().paused = true
 		game_over.show()
 			#get_tree().call_deferred("reload_current_scene")
+
