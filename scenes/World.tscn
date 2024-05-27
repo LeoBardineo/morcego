@@ -1,13 +1,13 @@
 [gd_scene load_steps=15 format=3 uid="uid://bwi0phryprse4"]
 
-[ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_1c5jr"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_1c5jr"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://ciac2evc5b6ow" path="res://parede.png" id="3"]
-[ext_resource type="PackedScene" uid="uid://bo1yvkqcwhhvc" path="res://scenes/WallNode.tscn" id="4"]
 [ext_resource type="AudioStream" uid="uid://ctnjb67h4l2jy" path="res://audio/bater_asas.mp3" id="5"]
 [ext_resource type="Texture2D" uid="uid://dba834k4a8lbv" path="res://morcego_1.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://ynr1jum3swot" path="res://morcego_2.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://c3cdk0eqbyn0r" path="res://morcego_3.png" id="8"]
+[ext_resource type="Script" path="res://scripts/Spawnner.gd" id="8_2mbmc"]
 [ext_resource type="PackedScene" uid="uid://8m774xjb4y2i" path="res://scenes/game_over.tscn" id="9_e256i"]
 [ext_resource type="PackedScene" uid="uid://cs5hldv6rdh7b" path="res://scenes/damage_sound.tscn" id="10_2u37n"]
 
@@ -116,23 +116,13 @@ texture = ExtResource("3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/LowerFloorNode/StaticBody2D"]
 shape = SubResource("1")
 
-[node name="WallGroup" type="Node2D" parent="."]
-position = Vector2(0.385681, 0)
+[node name="Spawnner" type="Node2D" parent="."]
+position = Vector2(400, 0)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("8_2mbmc")
 
-[node name="WallNode" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(352, 0)
-
-[node name="WallNode2" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(452, 0)
-
-[node name="WallNode3" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(728, 0)
-
-[node name="WallNode4" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(636, 0)
-
-[node name="WallNode5" parent="WallGroup" instance=ExtResource("4")]
-position = Vector2(544, 0)
+[node name="Timer" type="Timer" parent="Spawnner"]
+autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -145,3 +135,4 @@ position = Vector2(-153.118, -115.224)
 [connection signal="area_entered" from="PlayerNode/Player/Detect" to="PlayerNode/Player" method="_on_Detect_area_entered"]
 [connection signal="body_entered" from="PlayerNode/Player/Detect" to="PlayerNode/Player" method="_on_Detect_body_entered"]
 [connection signal="body_entered" from="PlayerNode/Player/Resetter" to="PlayerNode/Player" method="_on_Resetter_body_entered"]
+[connection signal="timeout" from="Spawnner/Timer" to="Spawnner" method="_on_timer_timeout"]
