@@ -51,3 +51,7 @@ func _on_Detect_body_entered(body):
 		get_tree().paused = true
 		game_over.show()
 			#get_tree().call_deferred("reload_current_scene")
+
+func _on_timer_timeout():
+	$AudioStreamPlayer2D.stop()
+	pass # Replace with function body.
