@@ -15,15 +15,16 @@ var score = 0
 @onready var game_over = $"../../GameOver"
 
 func _ready():
-	$Timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	$AnimatedSprite2D.play()
 	#score_txt.text = world.loadValue("Scores", "high_score")
 
 func _physics_process(_delta):
+	# O morcego cai pela velocidade de GRAVITY até atingir MAXFALLSPEED
 	motion.y += GRAVITY
 	if motion.y > MAXFALLSPEED:
 		motion.y = MAXFALLSPEED
 	
+	# Quando o morcego voa, move ele para cima e toca um áudio aleatório de voo por 1s
 	if Input.is_action_just_pressed("FLAP"):
 		$AudioStreamPlayer2D.play(START_LIST[randi() % START_LIST.size()])
 		$Timer.set_wait_time(1)
@@ -35,15 +36,18 @@ func _physics_process(_delta):
 	move_and_slide()
 	motion = velocity
 
+# Deleta a parede ao ficar fora da tela
 func _on_Resetter_body_entered(body):
 	if body.name == "Walls":
 		body.queue_free()
 
+# Adiciona +1 à pontuação ao passar pelo cano
 func _on_Detect_area_entered(area):
 	if area.name == "PointerArea":
 		score += 1
 		get_parent().get_parent().get_node("CanvasLayer/RichTextLabel").text = "[center]Pontuação: " + str(score) + "[/center]"
 
+# Game over ao bater no cano
 func _on_Detect_body_entered(body):
 	if body.name == "Walls":
 		#score_txt.text = world.saveValue("Scores", "high_score")
@@ -52,6 +56,7 @@ func _on_Detect_body_entered(body):
 		game_over.show()
 			#get_tree().call_deferred("reload_current_scene")
 
+# Após o timer acabar, para o áudio para não tocar os outros voos
 func _on_timer_timeout():
 	$AudioStreamPlayer2D.stop()
 	pass # Replace with function body.
