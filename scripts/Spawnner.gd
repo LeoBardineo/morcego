@@ -1,6 +1,6 @@
 extends Node2D
 var Wall = preload("res://scenes/WallNode.tscn")
-var wallsLeft = 5
+var wallsLeft = 50
 
 func _ready():
 	pass

@@ -8,13 +8,23 @@ const START_LIST = [1.0, 2.0, 3.7, 5.0, 6.4, 7.3, 8.0, 9.7, 11.0, 12.0, 13.0]
 
 var motion = Vector2()
 var score = 0
+###Save and Loading
+var save_file_path= "user://save/"
+var save_file_name= "PlayerSave.tres"
+var playerData = PlayerData.new()
 
 @onready var dmg_sound = $"../../DamageSound"
 @onready var world = $"../.."
 @onready var score_txt = $"../../CanvasLayer/RichTextLabel".text
 @onready var game_over = $"../../GameOver"
+@onready var high_score_label = $"../../CanvasLayer/HighScoreLabel"
+
+
 
 func _ready():
+	verify_save_directory(save_file_path)
+	load_data()
+	update_high_score_label()
 	$AnimatedSprite2D.play()
 	#score_txt.text = world.loadValue("Scores", "high_score")
 
@@ -51,6 +61,8 @@ func _on_Detect_area_entered(area):
 func _on_Detect_body_entered(body):
 	if body.name == "Walls":
 		#score_txt.text = world.saveValue("Scores", "high_score")
+		update_high_score()
+		save_data()
 		dmg_sound.play()
 		get_tree().paused = true
 		game_over.show()
@@ -60,3 +72,20 @@ func _on_Detect_body_entered(body):
 func _on_timer_timeout():
 	$AudioStreamPlayer2D.stop()
 	pass # Replace with function body.
+
+
+##Save and Loading
+func verify_save_directory(path: String):
+	DirAccess.make_dir_absolute(path)
+
+func update_high_score_label():
+	high_score_label.text = "Melhor pontuação: " + str(playerData.high_score) 
+
+func load_data():
+	playerData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+	
+func save_data():
+	ResourceSaver.save(playerData, save_file_path + save_file_name)
+
+func update_high_score():
+	playerData.change_high_score(score)
